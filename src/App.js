@@ -1,8 +1,7 @@
 import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
-import First from "./components/first";
-import Second from "./components/second";
-import Third from "./components/third";
+import Dictionary from "./components/dictionary";
+import Phone from "./components/phone";
 
 import "./server";
 import React from "react";
@@ -18,23 +17,48 @@ function App() {
       });
   }, []);
 
-  const array = 基本.map((jisho) => {
-    return <div key={jisho.key}>{jisho.name}</div>;
+  const phoneArray = 基本.map((jisho) => {
+    if (jisho.type == "phone") {
+      return (
+        <div key={jisho.key}>
+          {jisho.word} - {jisho.meaning} - {jisho.pronunciation}
+        </div>
+      );
+    }
+  });
+
+  const dictArray = 基本.map((jisho) => {
+    if (jisho.type == "dict") {
+      return (
+        <div key={jisho.key}>
+          {jisho.word} - {jisho.meaning} - {jisho.pronunciation}
+        </div>
+      );
+    }
   });
 
   return (
     <div className="App">
+      <Link to="/" className="link">
+        home
+      </Link>
+      <br />
+      <Link to="/dictionary" className="link">
+        dictionary
+      </Link>
+      <br />
+      <Link to="/phone" className="link">
+        phone
+      </Link>
+      <br />
       <Routes>
-        <Route path="/" element={<Home array={array} />} />
-        <Route path="/first" element={<First />} />
-        <Route path="/second" element={<Second />} />
-        <Route path="/third" element={<Third />} />
+        <Route
+          path="/"
+          element={<Home phone={phoneArray} dict={dictArray} />}
+        />
+        <Route path="/dictionary" element={<Dictionary dict={dictArray} />} />
+        <Route path="/phone" element={<Phone phone={phoneArray} />} />
       </Routes>
-      <Link to="/first">first</Link>
-      <br />
-      <Link to="/second">second</Link>
-      <br />
-      <Link to="/third">third</Link>
     </div>
   );
 }
