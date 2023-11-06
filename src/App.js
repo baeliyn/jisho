@@ -18,22 +18,26 @@ function App() {
   }, []);
 
   const phoneArray = 基本.map((jisho) => {
-    if (jisho.type == "phone") {
+    if (jisho.type === "phone") {
       return (
         <div key={jisho.key}>
           {jisho.word} - {jisho.meaning} - {jisho.pronunciation}
         </div>
       );
+    } else {
+      return <></>;
     }
   });
 
   const dictArray = 基本.map((jisho) => {
-    if (jisho.type == "dict") {
+    if (jisho.type === "dict") {
       return (
         <div key={jisho.key}>
           {jisho.word} - {jisho.meaning} - {jisho.pronunciation}
         </div>
       );
+    } else {
+      return <></>;
     }
   });
 
